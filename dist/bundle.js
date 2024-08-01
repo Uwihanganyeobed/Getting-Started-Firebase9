@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("console.log(\"hello firebase9\")\n\n//# sourceURL=webpack://firbase9/./src/index.js?");
+eval("// For Firebase JS SDK v7.20.0 and later, measurementId is optional\r\nconst firebaseConfig = {\r\n   apiKey: \"AIzaSyDpd7whHrN82tg2A60EGgWOKW-6cmswqeg\",\r\n   authDomain: \"fir-chatter-19bea.firebaseapp.com\",\r\n   projectId: \"fir-chatter-19bea\",\r\n   storageBucket: \"fir-chatter-19bea.appspot.com\",\r\n   messagingSenderId: \"1049726743728\",\r\n   appId: \"1:1049726743728:web:7fdd92ec1ede40bbedf775\",\r\n   measurementId: \"G-948TQNM8ER\"\r\n };\n\n//# sourceURL=webpack://firbase9/./src/index.js?");
 
 /***/ })
 

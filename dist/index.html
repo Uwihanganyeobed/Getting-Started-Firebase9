@@ -1,11 +1,78 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Firebase 9</title>
+   <style>
+      body {
+         font-family: Arial, sans-serif;
+         background-color: #f0f0f0;
+         color: #333;
+         margin: 0;
+         padding: 20px;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+      }
+      h1 {
+         color: #007BFF;
+         margin-bottom: 20px;
+      }
+      form {
+         background: #fff;
+         padding: 20px;
+         border-radius: 5px;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+         margin-bottom: 20px;
+         width: 300px;
+      }
+      label {
+         display: block;
+         margin-bottom: 5px;
+         font-weight: bold;
+      }
+      input[type="text"] {
+         width: 100%;
+         padding: 8px;
+         margin-bottom: 10px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+      }
+      button {
+         background-color: #007BFF;
+         color: white;
+         border: none;
+         padding: 10px 15px;
+         border-radius: 5px;
+         cursor: pointer;
+         width: 100%;
+      }
+      button:hover {
+         background-color: #0056b3;
+      }
+      .add, .delete {
+         margin-bottom: 15px;
+      }
+   </style>
 </head>
 <body>
-   <h1>Getting started with firebase 9</h1>
+   <h1>Getting started with Firebase 9</h1>
+
+   <form action="" class="add">
+      <label for="title">Title:</label>
+      <input type="text" name="title" required>
+      <label for="author">Author:</label>
+      <input type="text" name="author" required>
+      <button>Add a new book</button>
+   </form>
+
+   <form action="" class="delete">
+      <label for="id">Document ID:</label>
+      <input type="text" name="id" required>
+      <button>Delete a book</button>
+   </form>
+
    <script src="bundle.js"></script>
 </body>
 </html>

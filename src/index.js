@@ -2,7 +2,7 @@
 
 import {initializeApp} from 'firebase/app'
 import {
-  getFirestore, collection, getDocs,addDoc, deleteDoc, doc
+  getFirestore, collection,getDoc, onSnapshot,addDoc,updateDoc, deleteDoc, doc,query,serverTimestamp, where, orderBy
 } from 'firebase/firestore'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -26,20 +26,30 @@ const db = getFirestore()
 
 const colRef = collection(db, 'books')
 
-//get colllection data
+//queries
+const q = query(colRef,orderBy("createdAt"))
 
-getDocs(colRef)
-.then((snapshot)=> {
+//real-time colllection data
+
+// getDocs(colRef)
+// .then((snapshot)=> {
+//   let books = []
+//   snapshot.docs.forEach((doc)=>{
+//     books.push({ ...doc.data(), id: doc.id })
+//   })
+//   console.log(books)
+// })
+// .catch((err)=>{
+//   console.log(err.message)
+// })
+
+onSnapshot(q, (snapshot)=>{
   let books = []
   snapshot.docs.forEach((doc)=>{
     books.push({ ...doc.data(), id: doc.id })
   })
   console.log(books)
 })
-.catch((err)=>{
-  console.log(err.message)
-})
-
 //adding documents
 
 const addBookForm = document.querySelector('.add')
@@ -49,6 +59,7 @@ addBookForm.addEventListener('submit',(e)=>{
   addDoc(colRef, {
     title: addBookForm.title.value,
     author: addBookForm.author.value,
+    createdAt: serverTimestamp()
   })
   .then(()=>{
     addBookForm.reset()
@@ -66,5 +77,28 @@ deleteBookForm.addEventListener('submit',(e)=>{
   deleteDoc(docRef)
   .then(()=>{
     deleteBookForm.reset()
+  });
+})
+
+//get a single document
+
+const docRef = doc(db, 'books', 'xM1IzPXOXeRfWK9fQQiX')
+
+onSnapshot(docRef, (doc)=>{
+console.log(doc.data(), doc.id)
+})
+
+// update a single document
+const updateForm = document.querySelector('.update')
+updateForm.addEventListener('submit', (e)=>{
+  e.preventDefault()
+
+  const docRef = doc(db, 'books', updateForm.id.value)
+
+  updateDoc(docRef,{
+    title: 'Updated title',
+  })
+  .then(()=>{
+    updateForm.reset()
   });
 })

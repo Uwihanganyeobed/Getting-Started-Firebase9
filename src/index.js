@@ -17,7 +17,8 @@ import {
 import { getAuth,
    createUserWithEmailAndPassword,
    signOut,
-   signInWithEmailAndPassword
+   signInWithEmailAndPassword,
+   onAuthStateChanged
 
  } from "firebase/auth";
 
@@ -61,7 +62,7 @@ const q = query(colRef, orderBy("createdAt"));
 //   console.log(err.message)
 // })
 
-onSnapshot(q, (snapshot) => {
+const unsubCol = onSnapshot(q, (snapshot) => {
   let books = [];
   snapshot.docs.forEach((doc) => {
     books.push({ ...doc.data(), id: doc.id });
@@ -100,8 +101,8 @@ deleteBookForm.addEventListener("submit", (e) => {
 
 const docRef = doc(db, "books", "xM1IzPXOXeRfWK9fQQiX");
 
-onSnapshot(docRef, (doc) => {
-  // console.log(doc.data(), doc.id);
+const unsubDoc = onSnapshot(docRef, (doc) => {
+  console.log(doc.data(), doc.id);
 });
 
 // update a single document
@@ -128,7 +129,7 @@ signupForm.addEventListener("submit", (e) => {
   const password = signupForm.password.value;
   createUserWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-      console.log("User created:", cred.user);
+      // console.log("User created:", cred.user);
       signupForm.reset();
     })
     .catch((err) => {
@@ -144,7 +145,7 @@ logoutForm.addEventListener('click', (e) => {
 
   signOut(auth)
   .then(() => {
-    console.log('User logged out')
+    // console.log('User logged out')
   })
   .catch((err) => {
     console.log(err.message)
@@ -159,12 +160,29 @@ loginForm.addEventListener('submit', (e) => {
   const password = loginForm.password.value;
   signInWithEmailAndPassword(auth, email, password)
   .then((cred) => {
-    console.log('user logged in: ', cred.user)
+    // console.log('user logged in: ', cred.user)
   })
   .catch((err) => {
     console.log(err.message)
   });
 })
+
+// subscribe to  auth changes
+
+const unsubAuth = onAuthStateChanged(auth, (user)=>{
+  console.log('User Status changed: ', user)
+})
+
+// unsubscribe from auth changes (auth & db)
+
+const unsubButton = document.querySelector('.unsub')
+unsubButton.addEventListener('click', (e)=>{
+  console.log('unsubscribing')
+  unsubCol()
+  unsubDoc()
+  unsubAuth()
+})
+
 /*
 
 import { initializeApp } from "firebase/app";

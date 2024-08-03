@@ -1,5 +1,6 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +16,12 @@
          flex-direction: column;
          align-items: center;
       }
+
       h1 {
          color: #007BFF;
          margin-bottom: 20px;
       }
+
       form {
          background: #fff;
          padding: 20px;
@@ -27,11 +30,13 @@
          margin-bottom: 20px;
          width: 300px;
       }
+
       label {
          display: block;
          margin-bottom: 5px;
          font-weight: bold;
       }
+
       input[type="text"] {
          width: 100%;
          padding: 8px;
@@ -39,6 +44,23 @@
          border: 1px solid #ccc;
          border-radius: 4px;
       }
+
+      input[type="email"] {
+         width: 100%;
+         padding: 8px;
+         margin-bottom: 10px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+      }
+
+      input[type="password"] {
+         width: 100%;
+         padding: 8px;
+         margin-bottom: 10px;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+      }
+
       button {
          background-color: #007BFF;
          color: white;
@@ -48,14 +70,18 @@
          cursor: pointer;
          width: 100%;
       }
+
       button:hover {
          background-color: #0056b3;
       }
-      .add, .delete {
+
+      .add,
+      .delete {
          margin-bottom: 15px;
       }
    </style>
 </head>
+
 <body>
    <h1>Getting started with Firebase 9</h1>
 
@@ -73,16 +99,26 @@
       <button>Delete a book</button>
    </form>
 
-   <form action=""class="update">
+   <form action="" class="update">
       <label for="id">Document ID:</label>
       <input type="text" name="id" required>
-      <button>Update a  a book</button>
+      <button>Update a a book</button>
+
+   </form>
+
+   <form action="" class="signup">
+      <label for="email">Email:</label>
+      <input type="email" name="email" required>
+      <label for="password">Password:</label>
+      <input type="password" name="password" required>
+      <button>SignUp</button>
 
    </form>
 
    <script src="bundle.js"></script>
 </body>
-</html> 
+
+</html>
 
 <!-- 
 <!DOCTYPE html>

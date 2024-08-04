@@ -21,6 +21,7 @@ import { getAuth,
    onAuthStateChanged
 
  } from "firebase/auth";
+ import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -40,6 +41,8 @@ initializeApp(firebaseConfig);
 const db = getFirestore();
 
 const auth = getAuth();
+
+const storage = getStorage();
 
 //collection ref
 
@@ -102,7 +105,7 @@ deleteBookForm.addEventListener("submit", (e) => {
 const docRef = doc(db, "books", "xM1IzPXOXeRfWK9fQQiX");
 
 const unsubDoc = onSnapshot(docRef, (doc) => {
-  console.log(doc.data(), doc.id);
+  // console.log(doc.data(), doc.id);
 });
 
 // update a single document
@@ -183,6 +186,30 @@ unsubButton.addEventListener('click', (e)=>{
   // unsubAuth()
 })
 
+// uploading files
+
+const uploadImage = document.querySelector('.upload')
+const fileInput = document.getElementById('fileInput')
+
+uploadImage.addEventListener('submit', (e) =>{
+e.preventDefault()
+
+const file = fileInput.files[0]
+if(!file){
+  console.log('No file to upload')
+  return
+}
+const storageRef = ref(storage, `images/${file.name}`)
+
+uploadBytes(storageRef, file)
+.then((snapshot)=>{
+  console.log('Uploaded a blob or file')
+})
+.catch((error)=>{
+  console.log('Upload failed:', error)
+});
+uploadImage.reset()
+})
 /*
 
 import { initializeApp } from "firebase/app";
